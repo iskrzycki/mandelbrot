@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="300"
+style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+run();
+
+function drawPoint (x, y, color) {
+	ctx.fillStyle = color;
+	ctx.fillRect(x, y, 2, 2);
+}
+
+function run () {
+    var x0, y0, x, y, iteration, maxIteration, xTemp;
+    maxIteration = 100;
+    var palette = ["red", "black"];
+
+	for (var i = 0; i < 600; i++) {
+		for (var j = 0; j < 300; j++) {
+			x = 0;
+			y = 0;
+            x0 = ((i - 0) / (600 - 0)) * (1 + 2.5) - 2.5;
+            y0 = ((j - 0) / (300 - 0)) * (1 + 1) - 1;
+			
+			iteration = 0;
+
+			while (x*x + y*y < 4 && iteration < maxIteration) {
+				xTemp = x*x - y*y + x0;
+				y = 2*x*y + y0;
+				x = xTemp;
+				iteration++;
+			}
+            color = palette[iteration%2];
+			drawPoint(i, j, color);
+		}
+	}
+}
+
+</script>
+
+</body>
+</html>
