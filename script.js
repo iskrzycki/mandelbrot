@@ -10,7 +10,7 @@ var MANDELBROT = {
     MAX_Y: 1.25
 };
 
-var PALETTE = ["red", "black", "white"];
+var COLOR_PALETTE = ["red", "black", "white"];
 var MAX_ITERATIONS = 500;
 
 var canvas = document.getElementById("myCanvas");
@@ -28,12 +28,12 @@ function normalize (value, max, newMax, newMin) {
     return (value / max) * (newMax - newMin) + newMin;
 }
 
-function mandelbrot () {
-    var x0, y0, x, y, iteration, xTemp;
-    var paletteLength = PALETTE.length;
+(function mandelbrot () {
+    var i, j, x0, y0, x, y, iteration, xTemp, color;
+    var paletteLength = COLOR_PALETTE.length;
 
-    for (var i = 0; i < CANVAS.WIDTH; i++) {
-        for (var j = 0; j < CANVAS.HEIGHT; j++) {
+    for (i = 0; i < CANVAS.WIDTH; i++) {
+        for (j = 0; j < CANVAS.HEIGHT; j++) {
             x = 0;
             y = 0;
             iteration = 0;
@@ -47,10 +47,8 @@ function mandelbrot () {
                 x = xTemp;
                 iteration++;
             }
-            color = PALETTE[iteration % paletteLength];
-            drawPoint(i, j, color);
+            color = COLOR_PALETTE[iteration % paletteLength];
+            drawPoint(i, j, COLOR_PALETTE[iteration % paletteLength]);
         }
     }
-}
-
-mandelbrot();
+})();
